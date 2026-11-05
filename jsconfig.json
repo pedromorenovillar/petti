@@ -1,0 +1,12 @@
+// ADD editor support (VS Code autocompletion, jump-to-definition)
+// for absolute imports: from "./home-load" --> "@/home-load"
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    }
+  }
+}
