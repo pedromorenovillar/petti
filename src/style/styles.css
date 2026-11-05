@@ -1,84 +1,260 @@
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Oswald:wght@300..700&display=swap');
+
+/* ------------------------------------------------------------------
+   Design tokens — aged gig-poster paper, ink, rust and amber.
+   Display type: Oswald (condensed, screen-printed poster feel).
+   Body type:    Lora (warm literary serif, built for lyrics).
+------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --paper: #f1ebdf;
+  --paper-sheet: #fbf7ef;
+  --paper-shade: #ddd3c1;
+  --ink: #191612;
+  --ink-soft: #55504a;
+  --rule: #cec4b1;
+  --rust: #b4472b;
+  --amber: #c8892f;
+  --font-display: 'Oswald', 'Arial Narrow', sans-serif;
+  --font-body: 'Lora', Georgia, serif;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 
 body {
-  background: #f6f4f1;
-  font-family: 'Google Sans Flex', sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
 }
 
+::selection {
+  background-color: var(--rust);
+  color: var(--paper);
+}
+
+/* --- navigation ---------------------------------------------------- */
 header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
-  justify-content: space-around;
-  padding: 1em;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 1.2em 1em 1em;
+  background-color: var(--paper);
+  border-bottom: 1px solid var(--rule);
 }
+
+/* two-tone stripe: rust for rock, amber for folk */
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--rust) 0 50%, var(--amber) 50% 100%);
+}
+
 header nav {
-  padding: 0.6em 2.75em;
-  font-size: 1em;
-}
-
-header nav:hover {
+  padding: 0.4em 1.1em;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
   cursor: pointer;
-  color: purple;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-  transition: 0.4s ease-in-out;
+  transition: color 0.25s ease;
 }
 
+header nav:hover,
+header nav:focus-visible {
+  color: var(--rust);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 7px;
+}
+
+/* --- page column --------------------------------------------------- */
 .centered-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-top: 2em;
-  /* background-color: gray; */
+  width: 100%;
+  max-width: 78rem;
+  margin: 2.5em auto 0;
+  padding: 0 1.5em 5em;
 }
 
+.centered-container h1 {
+  margin: 0.15em 0 1.1em;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* accent rule beneath every section title */
+.centered-container h1::after {
+  display: block;
+  width: 3.25em;
+  height: 3px;
+  margin: 0.55em auto 0;
+  background-color: var(--rust);
+  content: '';
+}
+
+/* --- imagery ------------------------------------------------------- */
 .profile-pic,
 .work-pic,
 .life-pic,
 .music-pic,
 .video-pic {
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 40vw;
-  height: 50vh;
-  border: 1px solid gray;
-  border-radius: 5px;
-  margin-bottom: 2em;
-  background-color: #f3f4f6;
-  box-shadow: 2px 3px 2px 0px rgba(145, 134, 134, 0.6);
+  display: block;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  box-shadow: 9px 9px 0 -1px var(--paper-shade);
 }
 
+.profile-pic,
+.work-pic,
+.life-pic,
+.music-pic {
+  width: min(100%, 42rem);
+  margin-bottom: 2em;
+  background-color: var(--paper-shade);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: sepia(0.22) saturate(0.85) contrast(1.03);
+}
+
+/* Each frame matches its photo's own proportions, so `cover`
+   fills the box edge to edge without cropping anything away. */
 .profile-pic {
+  aspect-ratio: 401 / 322;
   background-image: url('https://www.badok.eus/wp-content/uploads/2014/06/10452887_10202680659355762_2597992746531745989_o-401x322.jpg');
 }
 
-.list-items {
-  list-style: square;
-  font-size: 1.5em;
-  padding: 0.5em;
-}
-
 .work-pic {
+  width: min(100%, 54rem);
+  aspect-ratio: 6650 / 2114;
   background-image: url('https://image.jimcdn.com/app/cms/image/transf/none/path/sbdbcc44dbb29ec48/backgroundarea/ie35cb0338d235d2a/version/1628493539/image.jpg');
 }
 
-.music-pic {
-  background-image: url('https://image.jimcdn.com/app/cms/image/transf/none/path/sbdbcc44dbb29ec48/image/i309677cd1f8d8ea7/version/1453300104/image.jpg');
-}
-.video-pic {
-  width: 698px;
-  height: 392px;
+.life-pic {
+  aspect-ratio: 4 / 3;
 }
 
-.lyric-container {
-  background-color: #f3f4f6;
-  border: 1px solid gray;
-  border-radius: 5px;
+.music-pic {
+  aspect-ratio: 794 / 523;
+  background-image: url('https://www.badok.eus/wp-content/uploads/2016/03/petti-argazki.jpg');
+}
+
+/* --- video + lyrics, side by side --------------------------------- */
+.media-row {
   display: flex;
-  justify-content: space-evenly;
-  width: 50vw;
-  padding: 3em;
-  font-size: 28px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
   margin-bottom: 2em;
+}
+
+.video-pic {
+  flex: 2 1 0;
+  min-width: 16rem;
+  width: auto;
+  aspect-ratio: 16 / 9;
+  background-color: var(--ink);
+}
+
+/* --- fact list ----------------------------------------------------- */
+.list-items {
+  margin: 0.3em 0;
+  padding: 0;
+  font-size: 1.06rem;
+  line-height: 1.7;
+  list-style: none;
+  text-align: center;
+}
+
+.list-items::before {
+  content: '\2014\00a0';
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--rust);
+}
+
+/* --- lyric sheet --------------------------------------------------- */
+.lyric-container {
+  flex: 1 1 0;
+  min-width: 16rem;
+  margin: 0;
+  padding: 1.75em 1.25em;
+  background-color: var(--paper-sheet);
+  border: 1px solid var(--rule);
+  border-top: 4px solid var(--ink);
+  border-radius: 2px;
+  box-shadow: 9px 9px 0 -1px var(--paper-shade);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.8vw, 1.1rem);
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* The markup separates every line with <br><br>. Hide the second break of
+   each pair so the sheet is single-spaced and can sit beside the video.
+   Note: `br + br` would NOT work here — the breaks chain past the text
+   nodes between them and every break after the first would vanish. */
+.lyric-basque br:nth-of-type(even) {
+  display: none;
+}
+
+/* --- small screens ------------------------------------------------- */
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  header {
+    gap: 0;
+  }
+
+  header nav {
+    padding: 0.4em 0.7em;
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+  }
+}
+
+/* --- stack video above lyrics when there is no room --------------- */
+@media (max-width: 1160px) {
+  .media-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .media-row .video-pic,
+  .media-row .lyric-container {
+    flex: none;
+    width: 100%;
+    min-width: 0;
+  }
 }

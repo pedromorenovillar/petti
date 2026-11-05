@@ -1,6 +1,6 @@
-# Groenemeyer presentation
+# Petti presentation
 
-Small SPA site used to present the singer Herbert Groenemeyer in a Basque language course.
+Small SPA site used to present the singer Petti in a Basque language course.
 
 ## Project Structure
 
@@ -8,12 +8,11 @@ Small SPA site used to present the singer Herbert Groenemeyer in a Basque langua
 src/
 │
 ├── abestia.js                    # Page with song and lyrics
-├── bizitza.js                    # Page about his life
 ├── index.js                      # Main entry point
 ├── lana.js                       # Page about his work
 ├── musika.js                     # Page about his music
 ├── nor-da.js                     # Intro page
-├── html/                         
+├── html/
 │   └── template.html             # Main HTML layout
 └── style/
     ├── styles.css                # Custom styling
@@ -42,4 +41,3 @@ webpack.prod.js     # Production build settings
 pnpm start      # Launches webpack-dev-server using webpack.dev.js
 pnpm run build  # Creates a production build using webpack.prod.js
 ```
-

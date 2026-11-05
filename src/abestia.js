@@ -17,15 +17,6 @@ export function abestia() {
   iframe.allowFullscreen = true;
 
   content.appendChild(header);
-  content.appendChild(iframe);
-
-  const description = [
-    'Etxeko Uztarekin eginda',
-    'Joxan Artzek hitzak idatzi zituen',
-    'Joxan Artzek "Txoria txori" ere idatzi nuen',
-  ];
-
-  displayItems(description);
 
   let lyricEU = `
 Emaile txarrari beala<br>
@@ -56,6 +47,14 @@ Norentzat behar duen<br>
 <br>
 Dio erakusten<br>`;
 
+  const description = [
+    'Etxeko Uztarekin eginda',
+    'Joxan Artzek hitzak idatzi zituen',
+    'Joxan Artzek "Txoria txori" ere idatzi nuen',
+  ];
+
+  displayItems(description);
+
   const lyricContainer = document.createElement('div');
   lyricContainer.className = 'lyric-container';
 
@@ -65,5 +64,10 @@ Dio erakusten<br>`;
 
   lyricContainer.appendChild(lyricBasque);
 
-  content.appendChild(lyricContainer);
+  // video and lyrics side by side
+  const mediaRow = document.createElement('div');
+  mediaRow.className = 'media-row';
+  mediaRow.appendChild(iframe);
+  mediaRow.appendChild(lyricContainer);
+  content.appendChild(mediaRow);
 }
